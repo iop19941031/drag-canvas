@@ -1,3 +1,11 @@
+首先，其实拖拽效果的思路是很简单的。主要就是三个步骤：
+
+1.onmousedown的时候，启动可拖拽事件，记录被拖拽元素的原始坐标参数。
+
+2.onmousemove的时候，实时记录鼠标移动的距离，结合被拖拽元素第一阶段的坐标参数，计算并设置新的坐标值。
+
+3.onmouseup的时候，关闭可拖拽事件，记录新的坐标值。
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
