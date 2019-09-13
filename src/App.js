@@ -1,19 +1,16 @@
 import React from 'react'
 import './App.css'
 
-class Circle {
-  constructor (x, y, radius) {
-    this.x = x
-    this.y = y
-    this.radius = radius
-    this.isSelected = false // 是否选中
-  }
+function Circle (x, y, radius) {
+  this.x = x
+  this.y = y
+  this.radius = radius
+  this.isSelected = false // 是否选中
 }
-class App extends React.Component {
+export default class App extends React.Component {
   constructor (props) {
     super(props)
-    const a = this.canvas = React.createRef()
-    console.log(a)
+    this.canvas = React.createRef()
     this.state = {
       date: new Date(),
       circles: [],
@@ -32,22 +29,6 @@ class App extends React.Component {
   // 在某个范围内生成随机数
   randomFromTo (from, to) {
     return Math.floor(Math.random() * (to - from + 1) + from)
-  }
-
-  // 添加圆圈事件
-  addRandomCircle () {
-    console.log(this.canvas.current)
-    // console.log(this)
-    // 为圆圈计算一个随机大小和位置
-    const RADIUS = this.randomFromTo(10, 60)
-    const X = this.randomFromTo(0, this.canvas.current.width)
-    const Y = this.randomFromTo(0, this.canvas.current.height)
-    // // 创建一个新圆圈
-    const circle = new Circle(X, Y, RADIUS)
-    // // // 把它保存在数组中
-    this.state.circles.push(circle)
-    // 重新绘制画布
-    this.drawCircles()
   }
 
   drawCircles () {
@@ -77,21 +58,7 @@ class App extends React.Component {
     })
   }
 
-  // 清空画布事件
-  clearCanvas () {
-    // 去除所有圆圈
-    this.setState({
-      circles: []
-    })
-
-    // 重新绘制画布.
-    this.drawCircles()
-  }
-
   canvasClick (e) {
-    console.log(this)
-    console.log(`canvas.offsetLeft++${e.pageX}`)
-    console.log(`canvas.offsetTop---${e.pageY}`)
     // 取得画布上被单击的点
     const CLICKX = e.pageX - this.canvas.current.offsetLeft
     const CLICKY = e.pageY - this.canvas.current.offsetTop
@@ -155,6 +122,31 @@ class App extends React.Component {
     })
   }
 
+  // 清空画布事件
+  clearCanvas () {
+    // 去除所有圆圈
+    this.state.circles = []
+    this.setState({
+      circles: []
+    })
+    // 重新绘制画布.
+    this.drawCircles()
+  }
+
+  // 添加圆圈事件
+  addRandomCircle () {
+    // 为圆圈计算一个随机大小和位置
+    const RADIUS = this.randomFromTo(10, 60)
+    const X = this.randomFromTo(0, this.canvas.current.width)
+    const Y = this.randomFromTo(0, this.canvas.current.height)
+    // // 创建一个新圆圈
+    const circle = new Circle(X, Y, RADIUS)
+    // // // 把它保存在数组中
+    this.state.circles.push(circle)
+    // 重新绘制画布
+    this.drawCircles()
+  }
+
   render () {
     return (
       <div className='App'>
@@ -175,5 +167,3 @@ class App extends React.Component {
     )
   }
 }
-
-export default App
