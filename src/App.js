@@ -2,7 +2,7 @@ import React from 'react'
 import './App.css'
 
 class Circle {
-  constructor(x, y, radius) {
+  constructor (x, y, radius) {
     this.x = x
     this.y = y
     this.radius = radius
@@ -10,9 +10,9 @@ class Circle {
   }
 }
 class App extends React.Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
-    const a = this.canvas = React.createRef();
+    const a = this.canvas = React.createRef()
     console.log(a)
     this.state = {
       date: new Date(),
@@ -22,19 +22,20 @@ class App extends React.Component {
       context: null
     }
   }
-  componentDidMount() {
+
+  componentDidMount () {
     this.setState({
-      context: this.canvas.current.getContext("2d")
+      context: this.canvas.current.getContext('2d')
     })
   }
 
   // 在某个范围内生成随机数
-  randomFromTo(from, to) {
+  randomFromTo (from, to) {
     return Math.floor(Math.random() * (to - from + 1) + from)
   }
 
   // 添加圆圈事件
-  addRandomCircle() {
+  addRandomCircle () {
     console.log(this.canvas.current)
     // console.log(this)
     // 为圆圈计算一个随机大小和位置
@@ -49,7 +50,7 @@ class App extends React.Component {
     this.drawCircles()
   }
 
-  drawCircles() {
+  drawCircles () {
     // 清除画布，准备绘制
     this.state.context.clearRect(0, 0, this.canvas.current.width, this.canvas.current.height)
 
@@ -70,7 +71,6 @@ class App extends React.Component {
       }
       this.state.context.fill()
       this.state.context.stroke()
-
     }
     this.setState({
       context: this.state.context
@@ -78,7 +78,7 @@ class App extends React.Component {
   }
 
   // 清空画布事件
-  clearCanvas() {
+  clearCanvas () {
     // 去除所有圆圈
     this.setState({
       circles: []
@@ -88,8 +88,7 @@ class App extends React.Component {
     this.drawCircles()
   }
 
-  canvasClick(e) {
-
+  canvasClick (e) {
     console.log(this)
     console.log(`canvas.offsetLeft++${e.pageX}`)
     console.log(`canvas.offsetTop---${e.pageY}`)
@@ -127,7 +126,8 @@ class App extends React.Component {
       }
     }
   }
-  stopDragging(e) {
+
+  stopDragging (e) {
     // 判断圆圈是否开始拖拽
     if (this.state.isDragging === true) {
       // 判断拖拽对象是否存在
@@ -147,15 +147,15 @@ class App extends React.Component {
         this.drawCircles()
       }
     }
-
   }
-  dragCircle(e) {
+
+  dragCircle (e) {
     this.setState({
       isDragging: false
     })
-
   }
-  render() {
+
+  render () {
     return (
       <div className='App'>
         <canvas
